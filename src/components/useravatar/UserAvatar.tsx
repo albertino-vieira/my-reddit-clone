@@ -3,21 +3,21 @@ import { User } from "next-auth";
 import { Avatar, AvatarFallback } from "../ui/Avatar";
 import Image from "next/image";
 import { Icons } from "../icons/Icons";
+import { AvatarProps } from "@radix-ui/react-avatar";
 
-
-interface UserAvatarProps {
+interface UserAvatarProps extends AvatarProps {
   user: Pick<User, "name" | "image">;
 }
 
-const UserAvatar: FC<UserAvatarProps> = ({ user }) => {
+const UserAvatar: FC<UserAvatarProps> = ({ user, ...props }) => {
   return (
-    <Avatar>
+    <Avatar {...props}>
       {user.image ? (
         <div className="relative aspect-square h-full w-full">
           <Image
             fill
             src={user.image}
-            alt={user.name}
+            alt="profile image"
             referrerPolicy="no-referrer"
           />
         </div>
